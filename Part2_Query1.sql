@@ -12,3 +12,14 @@ group by brands.name
 order by receipts_scanned desc
 LIMIT 5
 ;
+
+
+"""
+SELECT Fetchrewards.brands.name, COUNT(DISTINCT receipts.receiptid) AS receipts_scanned FROM Fetchrewards.receipts
+JOIN Fetchrewards.items ON items.receiptId = receipts.receiptId
+JOIN Fetchrewards.brands ON items.barcode = brands.barcode
+WHERE TO_CHAR(receipts.dateScanned,'YYYY-MM')>=  (SELECT TO_CHAR(MAX(dateScanned),'YYYY-MM') FROM Fetchrewards.receipts)
+GROUP BY brands.name
+ORDER BY receipts_scanned desc
+LIMIT 5;
+"""

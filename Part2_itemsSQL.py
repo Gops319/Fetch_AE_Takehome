@@ -15,7 +15,7 @@ cursor = conn.cursor()
 csv_file = 'C:/Users/gopio/Downloads/Fetch/items.csv'
 df = pd.read_csv(csv_file)
 
-timestamp_columns = ['createdDate', 'dateScanned','finishedDate','modifyDate','pointsAwardedDate','purchaseDate']  # Update with your timestamp column names
+timestamp_columns = ['createdDate', 'dateScanned','finishedDate','modifyDate','pointsAwardedDate','purchaseDate'] 
 for col in timestamp_columns:
     if col in df.columns:
         df[col] = df[col].where(pd.notnull(df[col]), None)
