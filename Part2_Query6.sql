@@ -9,7 +9,8 @@ recent_users AS (
     FROM Fetchrewards.users, max_created_date
     WHERE createdDate >= max_created_date.six_months_prior
 )
-SELECT brands.name, COUNT(items.receiptId) AS transaction_count
+SELECT brands.name, COUNT(distinct receipts.receiptId) AS transaction_count
+--If each receipt is considered as a transaction, distinct receipts have to be taken 
 FROM Fetchrewards.receipts 
 INNER JOIN recent_users ON receipts.userId = recent_users.userId
 INNER JOIN Fetchrewards.items ON receipts.receiptId = Fetchrewards.items.receiptId
